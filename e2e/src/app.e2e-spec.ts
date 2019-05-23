@@ -1,8 +1,6 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
-
-// import { element } from '@angular/core/src/render3';
-import { element, by, Key } from 'protractor';
+import { element } from '@angular/core/src/render3';
 
 const params = '?insuredName=Don&policyNumber=00025649&agentEmail=penny@integrityins.com';
 
@@ -31,13 +29,13 @@ describe('workspace-project App', () => {
     expect(page.getEffectiveDate()).toBe('Invalid date');
   });
 
+  // currently fails because radio button control is covered by label
   it('selects Alternate Employer and enters appropriate information', () => {
     page.navigateTo(params);
-    element(by.id('radioBtnAlternateEmployer')).click();
+    page.chooseAlternateEmployerChange();
     const altEmpData = 'Some Other Construction Company, 123 Main St., San Marcos, TX';
-    element(by.id('alternateTextMessage')).clear().then( () => {
-      element(by.id('alternateTextMessage')).sendKeys(altEmpData);
-    });
+    page.setAlternateEmployerData(altEmpData);
+
     expect(page.getAlternateEmployerData()).toBe(altEmpData);
   });
 

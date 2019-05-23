@@ -2,6 +2,7 @@ import { browser, by, element, Key } from 'protractor';
 import { SeleniumServer } from 'selenium-webdriver/remote';
 
 export class AppPage {
+
   navigateTo( params: string ) {
     return browser.get(browser.baseUrl + params) as Promise<any>;
   }
@@ -19,6 +20,7 @@ export class AppPage {
       element(by.id('agentEmail')).sendKeys(newEmail);
     });
   }
+  // Alternate way to clear without handling promise...
   // setAgentEmail(newEmail) {
   //   element(by.id('agentEmail')).sendKeys(Key.chord(Key.CONTROL, 'a'), newEmail);
   // }
@@ -34,4 +36,15 @@ export class AppPage {
   getAlternateEmployerData() {
     return element(by.id('alternateTextMessage')).getAttribute('value');
   }
+
+  chooseAlternateEmployerChange() {
+    element(by.id('radioBtnAlternateEmployer')).click();
+  }
+
+  setAlternateEmployerData(altEmpData: string) {
+    element(by.id('alternateTextMessage')).clear().then( () => {
+      element(by.id('alternateTextMessage')).sendKeys(altEmpData);
+    });
+  }
+
 }
