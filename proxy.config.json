@@ -1,0 +1,8 @@
+{
+    "/docDataServicesWeb/*": {
+        "target": "http://wdeonl",
+        "secure":false,
+        "changeOrigin":true,
+        "logLevel": "debug"
+    }
+}

@@ -1,0 +1,64 @@
+<h4>Attach Files</h4>
+<p>Use this space to provide supporting files, if needed.</p>
+
+<input type="file" #fileInput ng2FileSelect [uploader]="uploader" multiple />
+<div class="base-drop-zone" [ngClass]="{'file-over': hasBaseDropZoneOver}" ng2FileDrop [uploader]="uploader"
+  (click)="fileInput.click()"></div>
+<label for="file-upload" class="custom-file-upload">
+  <div class="centered-content">
+    <i class="fas fa-upload fa-2x"></i>
+    <span>
+      <span class="blue-text">
+        Upload a Document</span>
+      <br>or drag and drop one here</span>
+  </div>
+</label>
+
+{{uploader.queue}}
+
+<table class="upload-queue-table">
+  <thead>
+    <tr>
+      <th *ngIf=" uploader.queue !=0">Uploading:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of uploader.queue; let lastItem = last;">
+      <div class="upload-queue-row">
+        <div class="grid-x">
+          <td class="cell small-4">
+            {{ item?.file?.name }}
+          </td>
+          <td class="cell small-4">
+            <div class="file-size-centered">
+              {{ item?.file?.size/1024/1024 | number:'.2' }} MB
+            </div>
+          </td>
+          <td class="cell small-4">
+            <div class="icons-float-right">
+              <i class=" fas fa-spinner fa-spin"></i>
+              <i class="fa fa-check-circle" style="color:green"></i>
+              <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                <span class="glyphicon glyphicon-trash"></span>
+                <i class="far fa-trash-alt"></i> </button>
+            </div>
+          </td>
+        </div>
+      </div>
+      <hr *ngIf="!lastItem">
+    </tr>
+  </tbody>
+</table>
+
+<div id="change-request-italic-note">
+  This Change Request is not evidence of an endorsement to the policy. Do not use or release it outside of your
+  agency.</div>
+<div class="grid-x">
+  <div class="cell" style="margin-bottom: 50px;">
+    <div class="small-12 columns text-center">
+      <button class="txmButton txmBtnColor-Sec">Cancel</button>
+      <span style="margin-right: 80%;"></span>
+      <button class="txmButton txmBtnColor-Pri" [disabled]=false>Submit</button>
+    </div>
+  </div>
+</div>

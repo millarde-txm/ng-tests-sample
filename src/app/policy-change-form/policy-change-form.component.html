@@ -1,0 +1,604 @@
+
+<form id="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm" data-abide novalidate>
+  <h2 class="margin-top-50"> Policy Change Request </h2>
+  <hr class="margin-bottom-50">
+  <!-- div content for  -->
+  <div class="grid-x">
+    <div class="cell">
+      <div class="margin-bottom-25">
+        <div class="grid-x">
+          <div style="font-weight: bolder;">
+            <div class="small-10 medium-5 large-4 columns">Insured Name :</div>
+          </div>
+        </div>
+        <div class="grid-x">
+          <div id="policyNumber" class="small-10 medium-5 large-4 columns "> {{ insuredName }} </div>
+        </div>
+      </div>
+      <div class="margin-bottom-50"> 
+        <div class="grid-x">
+          <b>
+            <div class="small-10 medium-5 large-4 columns">Policy Number :</div>
+          </b>
+        </div>
+        <div class="grid-x">
+          <div id="policyNumber" class="small-10 medium-5 large-4 columns "> {{ policyNumber }} </div>
+        </div>
+      </div>
+      <div class="margin-left-50 margin-bottom-15">
+        <div class="grid-x">
+          <div class="small-10 medium-5 large-3 cell">
+            <label class="txmMol-inputbox">
+              <!-- <input type="email" id="agentEmail" name="agentEmail" placeholder="AgentEmail" value="{{agentEmail}}" minlength="3" required pattern="email"/>
+              <span>Agent Email</span> -->
+              <input type="email" id="agentEmail" name="agentEmail"  placeholder="AgentEmail"  minlength="3" [(ngModel)]="agentEmail" required #agentEmailVar="ngModel" ngModel email>
+              <div *ngIf="agentEmailVar.invalid">
+                <div *ngIf="agentEmailVar.errors.required" class="error-message">*Email is a required field</div>
+                <div *ngIf="agentEmailVar.errors.email" class="error-message">Email must be a valid email address</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="margin-left-50 margin-bottom-50">
+        <div class="grid-x">
+          <div class="small-10 medium-5 large-3 cell">
+            <label class="txmMol-inputbox">
+              <input id="effectiveDate" class="txmDatepicker"  type="text" name="effectiveDate" [(ngModel)]="effectiveDate" bsDatepicker 
+                placeholder="Select a date" [minDate]="todayDate">
+              <span>Effective Date of Policy Change</span>
+              <i class="far fa-calendar"></i>
+             </label>
+             <div *ngIf="!effectiveDate" class="error-message">*Effective Date is a required field</div>
+          </div>
+        </div>
+      </div>
+      <h3 class="margin-bottom-25"> Select Type of Change</h3>
+      <div class="grid-x">
+        <div class="cell">
+          <collapsible-list [type]="'expanded'" class="border-none margin-left-50" style="box-shadow:none;">
+            <!--Specific NOMC Begins-->
+            <collapsible-list-item class="margin-bottom-25">
+              <collapsible-header class="collapsibleHeader margin-left-50" style="border-bottom:none;">
+                <label (click)="showSpecificNomc()" class="txmMol-radioContainer txmMol-radio">
+                  <input id="radioBtnSpecificNomc" class="radiobut" type="radio" name="changeType" [checked]="isSpecificNomc" value="specificNomc" />
+                  Specific Notice of Material Change
+                  <div class="txmMol-radioContainer-back"> </div><br /><br />
+                </label>
+              </collapsible-header>
+              <collapsible-body [expanded]="isSpecificNomc" class="collapsibleBody border-none" >
+                <!-- Code for R3 BEGINS-->
+                <!-- <div class="collapsible-body-innerdiv">
+                   <div class="grid-x">
+                    <div class="small-10 medium-5 large-4 margin-right-25">
+                      <label class="txmMol-inputbox">
+                        <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" placeholder="First Name" value="{{firstName}}" required />
+                        <span>First Name</span>
+                        <span class="form-error">Required</span>
+                      </label>
+                    </div>
+                    <div class="small-10 medium-5 large-4 margin-right-25">
+                    <label class="txmMol-inputbox">
+                      <input type="text" id="lastName" name="
+                      lastName" [(ngModel)]="lastName" placeholder="Last Name" value="{{lastName}}" required />
+                      <span>Last Name</span>
+                      <span class="form-error">Required</span>
+                    </label>
+                  </div>
+                  <div class="margin-right-25"> 
+                    <select id="nomcDays" name="nomcDays" class="dropdown-lg" required>
+                      <option selected="selected" value="30 days">30 Days</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="grid-x" style="position: relative;">
+                  <div class="saveButton grid-x">
+                    <button id="btnSave" class="txmButton-small txmBtnColor-PriAlt"> Save</button>
+                 </div>
+                </div>
+                </div> -->
+                <!-- Code for R3 ENDS -->
+                <!-- Temporary R2 code BEGINS-->
+
+                <div class="collapsible-body-innerdiv">
+                    <div class="margin-bottom-25"> Use this space to include any notes or questions you might have.</div>
+                    <label class="txmMol-inputbox">
+                      <textarea type="text" id="specificNomcTextMessage" name="specificNomcTextMessage" 
+                        placeholder="placeholder" required [(ngModel)]="specificNomcTextMessage"> </textarea>
+                      <span>Text</span>
+                        <div *ngIf="!specificNomcTextMessage && specificNomcTextMessage!=' '" style="color: red;background-color: none;">*Message is a required field</div>
+                    </label>
+                    <div class="grid-x" style="position: relative;">
+                      <div class="saveButton grid-x">
+                        <button id="btnSaveSpecificNOMC" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(specificNomcTextMessage)" (click)="save(specificNomcTextMessage);"> Save</button>
+                      </div>
+                    </div>
+                  </div>
+              </collapsible-body>
+              <!-- Temp R2 code ENDS-->
+            </collapsible-list-item>
+            <!--Specific NOMC Ends-->
+            <!-- Blanket NOMC Begins-->
+            <collapsible-list-item class="margin-bottom-25">
+              <collapsible-header class="collapsibleHeader margin-left-50" style="border-bottom:none;">
+                <label (click)="showBlanketNomc()" class="txmMol-radioContainer txmMol-radio">
+                  <input id="radioBtnBlanketNomc" class="radiobut" type="radio" name="changeType" [checked]="isBlanketNomc" value="blanketNomc" />
+                  Blanket Notice of Material Change
+                  <div class="txmMol-radioContainer-back"> </div><br /><br />
+                </label>
+              </collapsible-header>
+              <collapsible-body [expanded]="isBlanketNomc" class="collapsibleBody border-none" >
+                <div class="collapsible-body-innerdiv">
+                  <div class="margin-bottom-25"> Use this space to include any notes or questions you might have.</div>
+                  <label class="txmMol-inputbox">
+					<textarea type="text" id="blanketNomcTextMessage" name="blanketNomcTextMessage" [(ngModel)]="blanketNomcTextMessage" placeholder="placeholder" required> </textarea>
+                    <span>Text</span>
+                    <div *ngIf="!blanketNomcTextMessage" style="color: red;background-color: none;">*Message is a required field</div>
+                  </label>
+                  <div class="grid-x" style="position: relative;">
+                    <div class="saveButton grid-x">
+                        <button id="btnSaveBlanketNomc" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(blanketNomcTextMessage)" (click)="save(blanketNomcTextMessage);"> Save</button>
+                   </div>
+                  </div>
+								</div>
+              </collapsible-body>
+            </collapsible-list-item>
+            <!--BlanketNOMC Ends-->
+            <!--Alternate Employer Begins -->
+            <collapsible-list-item class="margin-bottom-25">
+              <collapsible-header class="collapsibleHeader margin-left-50" style="border-bottom:none;">
+                <label (click)="showAlternate()" class="txmMol-radioContainer txmMol-radio">
+                  <input id="radioBtnAlternateEmployer" class="radiobut" type="radio" name="changeType" [checked]="isAlternate" value="alternate" />
+                  Alternate Employer
+                  <div class="txmMol-radioContainer-back"> </div><br /><br />
+                </label>
+              </collapsible-header>
+              <collapsible-body class="collapsibleBody border-none" [expanded]="isAlternate">
+               <div class="collapsible-body-innerdiv">
+                <div class="margin-bottom-25"> Use this space to include any notes or questions you might have.</div>
+                <label class="txmMol-inputbox">
+                  <textarea type="text" id="alternateTextMessage" [(ngModel)]="alternateTextMessage" required name="alternateTextMessage" placeholder="Text"> </textarea>
+                  <span>Text</span>
+                  <div *ngIf="!alternateTextMessage" class="error-message">*Message is a required field</div>
+                </label>
+                <div class="grid-x" style="position: relative;">
+                  <div class="saveButton grid-x">
+                    <button id="btnSaveAlternate" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(alternateTextMessage)" (click)="save(alternateTextMessage);"> Save</button>
+                 </div>
+                </div>
+              </div>
+              </collapsible-body>
+            </collapsible-list-item>
+            <!--Alternate Employer Ends-->
+            <!--Specific Waiver Begins-->
+            <collapsible-list-item class="margin-bottom-25">
+              <collapsible-header class="collapsibleHeader margin-left-50" style="border-bottom:none;">
+                <label (click)="showSpecificWaiver()" class="txmMol-radioContainer txmMol-radio">
+                  <input id="radioBtnSpecificWaiver" class="radiobut" type="radio" name="changeType" [checked]="isSpecificWaiver" value="specificwaiver" /> Specific Waiver
+                  of Subrogation
+                  <div class="txmMol-radioContainer-back"> </div><br /><br />
+                </label>
+              </collapsible-header>
+              <collapsible-body [expanded]="isSpecificWaiver" class="collapsibleBody border-none">
+                <!-- SPECIFIC WAIVER R3 BEGIN-->
+                <!-- <div class="collapsible-body-innerdiv">
+                  <div class="margin-top-25">
+                      <div class="grid-x">
+                          <div class="small-12 medium-5 large-4 margin-right-25">
+                            <label class="txmMol-inputbox">
+                              <input type="text" id="orgName" placeholder="organizationName" value="{{organizationName}}" required />
+                              <span>Name/Organization</span>
+                              <span class="form-error">Required</span>
+                            </label>
+                          </div>
+                          <div class="small-10 medium-5 large-4 margin-right-25">
+                          <label class="txmMol-inputbox">
+                            <input type="text" id="jobOperation" placeholder="City" value="{{jobOperation}}" required />
+                            <span>Job/Operation</span>
+                            <span class="form-error">Required</span>
+                          </label>
+                        </div>
+                       </div>      
+                    <div class="grid-x">
+                              <div class="small-10 medium-5 large-4 margin-right-25">
+                                <label class="txmMol-inputbox">
+                                  <input type="text" id="address" placeholder="Address" value="{{address}}" required />
+                                  <span>Address</span>
+                                  <span class="form-error">Required</span>
+                                </label>
+                              </div>
+                              <div class="small-10 medium-5 large-4 margin-right-25">
+                              <label class="txmMol-inputbox">
+                                <input type="text" id="city" placeholder="City" value="{{city}}" required />
+                                <span>City</span>
+                                <span class="form-error">Required</span>
+                              </label>
+                            </div>
+                           </div> 
+                           <div class="grid-x">
+                              <div class="small-10 medium-5 large-4 margin-right-25">
+                              <div class="margin-right-25"> 
+                                  <select id="drpDownState" class="dropdown-lg"  name="State" placeholder="State" required>
+                                    <option value="AL">Alabama (AL)</option>
+                              <option value="AK">Alaska (AK)</option>
+                              <option value="AZ">Arizona (AZ)</option>
+                              <option value="AR">Arkansas (AR)</option>
+                              <option value="CA">California (CA)</option>
+                              <option value="CO">Colorado (CO)</option>
+                              <option value="CT">Connecticut (CT)</option>
+                              <option value="DE">Delaware (DE)</option>
+                              <option value="DC">District Of Columbia (DC)</option>
+                              <option value="FL">Florida (FL)</option>
+                              <option value="GA">Georgia (GA)</option>
+                              <option value="HI">Hawaii (HI)</option>
+                              <option value="ID">Idaho (ID)</option>
+                              <option value="IL">Illinois (IL)</option>
+                              <option value="IN">Indiana (IN)</option>
+                              <option value="IA">Iowa (IA)</option>
+                              <option value="KS">Kansas (KS)</option>
+                              <option value="KY">Kentucky (KY)</option>
+                              <option value="LA">Louisiana (LA)</option>
+                              <option value="ME">Maine (ME)</option>
+                              <option value="MD">Maryland (MD)</option>
+                              <option value="MA">Massachusetts (MA)</option>
+                              <option value="MI">Michigan (MI)</option>
+                              <option value="MN">Minnesota (MN)</option>
+                              <option value="MS">Mississippi (MS)</option>
+                              <option value="MO">Missouri (MO)</option>
+                              <option value="MT">Montana (MT)</option>
+                              <option value="NE">Nebraska (NE)</option>
+                              <option value="NV">Nevada (NV)</option>
+                              <option value="NH">New Hampshire (NH)</option>
+                              <option value="NJ">New Jersey (NJ)</option>
+                              <option value="NM">New Mexico (NM)</option>
+                              <option value="NY">New York (NY)</option>
+                              <option value="NC">North Carolina (NC)</option>
+                              <option value="ND">North Dakota (ND)</option>
+                              <option value="OH">Ohio (OH)</option>
+                              <option value="OK">Oklahoma (OK)</option>
+                              <option value="OR">Oregon (OR)</option>
+                              <option value="PA">Pennsylvania (PA)</option>
+                              <option value="RI">Rhode Island (RI)</option>
+                              <option value="SC">South Carolina (SC)</option>
+                              <option value="SD">South Dakota (SD)</option>
+                              <option value="TN">Tennessee (TN)</option>
+                              <option selected="selected" value="TX" >Texas (TX)</option>
+                              <option value="UT">Utah (UT)</option>
+                              <option value="VT">Vermont</option>
+                              <option value="VA">Virginia</option>
+                              <option value="WA">Washington</option>
+                              <option value="WV">West Virginia</option>
+                              <option value="WI">Wisconsin</option>
+                              <option value="WY">Wyoming</option>
+                                  </select>
+                                </div>
+                                </div>
+                              <div class="small-10 medium-5 large-4 margin-right-25">
+                                <label class="txmMol-inputbox">
+                                        <input type="text" id="zip" placeholder="Zip" value="{{zip}}" required />
+                                        <span>Zip</span>
+                                        <span class="form-error">Required</span>
+                                      </label>
+                                </div>
+                           </div>
+                           <div class="grid-x">
+                              <div class="small-10 medium-5 large-4 margin-right-25">
+                                  <label class="txmMol-inputbox">
+                                          <input type="text" id="payroll" placeholder="payroll" value="{{payroll}}" required />
+                                          <span>Payroll</span>
+                                          <span class="form-error">Required</span>
+                                        </label>
+                                  </div>  
+                            <div class="small-10 medium-5 large-4 margin-right-25">
+                              <div class="margin-right-25"> 
+                                  <select id="drDownClassCode" class="dropdown-lg" name="classCode" placeholder="classCode" required>
+                                    <option value="Class Code">Class Code</option>
+                                    <span>Class Code</span>
+                                  </select>
+                                </div>
+                                </div>
+                              </div>
+                              <div class="grid-x" style="position: relative;">
+                                <div class="saveButton grid-x">
+                                  <button id="btnSaveSpecificWaiver" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(specificWaivercTextMessage)" (click)="save(specificWaiverTextMessage);"> Save</button>
+                               </div>
+                              </div>
+                        </div>
+                </div> -->
+                <!-- Code for R3 ENDS -->
+                <!-- Temporary R2 code BEGINS-->
+                <div class="collapsible-body-innerdiv">
+                    <div class="margin-bottom-25"> Use this space to include any notes or questions you might have.</div>
+                    <label class="txmMol-inputbox">
+                      <textarea type="text" id="specificWaiverTextMessage" [(ngModel)]="specificWaiverTextMessage" name="specificWaiverTextMessage" required placeholder="Text"> </textarea>
+                      <span>Text</span>
+                      <div *ngIf="!specificWaiverTextMessage" class="error-message">*Message is a required field</div>
+                    </label>
+                    <div class="grid-x" style="position: relative;">
+                      <div class="saveButton grid-x">
+                        <button id="btnSaveSpecificWaiver" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(specificWaiverTextMessage)" (click)="save(specificWaiverTextMessage);"> Save</button>
+                     </div>
+                    </div>
+                    </div>
+                <!-- Temporary R2 code ENDS-->
+              </collapsible-body>
+            </collapsible-list-item>
+            <!--Specific Waiver Ends-->
+            <!--Blanker Waiver begins-->
+            <collapsible-list-item class="margin-bottom-25">
+              <collapsible-header class="collapsibleHeader margin-left-50" style="border-bottom:none;">
+                <label (click)="showBlanketWaiver()" class="txmMol-radioContainer txmMol-radio">
+                  <input id="radioBtnBlanketWaiver" class="radiobut" type="radio" name="changeType" [checked]="isBlanketWaiver" value="blanketwaiver" /> Blanket Waiver
+                  of Subrogation
+                  <div class="txmMol-radioContainer-back"> </div><br /><br />
+                </label>
+              </collapsible-header>
+              <collapsible-body [expanded]="isBlanketWaiver" class="collapsibleBody border-none">
+                <div class="collapsible-body-innerdiv">
+                <div class="margin-bottom-25"> Use this space to include any notes or questions you might have.</div>
+                <label class="txmMol-inputbox">
+                  <textarea type="text" id="blanketWaiverTextMessage" name="blanketWaiverTextMessage" required [(ngModel)]="blanketWaiverTextMessage" placeholder="Text"> </textarea>
+                  <span>Text</span>
+                  <div *ngIf="!blanketWaiverTextMessage" class="error-message">*Message is a required field</div>
+                </label>
+                <div class="grid-x" style="position: relative;">
+                  <div class="saveButton grid-x">
+                    <button id="btnSaveBlanketWaiver" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(blanketWaiverTextMessage)" (click)="save(blanketWaiverTextMessage);"> Save</button>
+                 </div>
+                </div>
+                </div>
+              </collapsible-body>
+            </collapsible-list-item>
+            <!-- Blanket Waiver Ends-->
+            <!--Mailing Address Change Begins-->
+            <!-- <collapsible-list-item class="margin-bottom-25">
+              <collapsible-header class="collapsibleHeader margin-left-50" style="border-bottom:none;">
+                <label (click)="showMailingAddressChange()" class="txmMol-radioContainer txmMol-radio">
+                  <input id="radioBtnMailingAddress" class="radiobut" type="radio" name="changeType" [checked]="isMailingAddressChange" value="mailingAddressChange" />
+                  Mailing Address Change
+                  <div class="txmMol-radioContainer-back"> </div><br /><br />
+                </label>
+              </collapsible-header>
+              <collapsible-body class="collapsibleBody border-none" [expanded]="isMailingAddressChange">
+               <div class="collapsible-body-innerdiv">
+                <div class="grid-x">
+                  <h5 bold>Current Mailing Address</h5>
+                </div>
+                <div class="grid-x">
+                  <p> address will come here....test filler </p>
+                  </div>
+                  <div class="margin-top-50">
+                    <div class="grid-x">
+                      <h5 class="margin-bottom-25"> New Mailing Address</h5>
+                    </div>
+                    <div class="grid-x">
+                        <div class="small-10 medium-5 large-4 margin-right-25">
+                          <label class="txmMol-inputbox">
+                            <input type="text" id="newAddress" placeholder="Address" value="{{newAddress}}" required />
+                            <span>Address</span>
+                            <span class="form-error">Required</span>
+                          </label>
+                        </div>
+                        <div class="small-10 medium-5 large-4 margin-right-25">
+                        <label class="txmMol-inputbox">
+                          <input type="text" id="newCity" placeholder="City" value="{{newCity}}" required />
+                          <span>City</span>
+                          <span class="form-error">Required</span>
+                        </label>
+                      </div>
+                     </div> 
+                     <div class="grid-x">
+                        <div class="small-5 medium-5 large-2 margin-right-25">
+                        <div class="margin-right-25"> 
+                            <select id="drpDownNewState" class="dropdown-lg" (change)="populateStates()" required>
+                              <option value="AL">Alabama (AL)</option>
+                              <option value="AK">Alaska (AK)</option>
+                              <option value="AZ">Arizona (AZ)</option>
+                              <option value="AR">Arkansas (AR)</option>
+                              <option value="CA">California (CA)</option>
+                              <option value="CO">Colorado (CO)</option>
+                              <option value="CT">Connecticut (CT)</option>
+                              <option value="DE">Delaware (DE)</option>
+                              <option value="DC">District Of Columbia (DC)</option>
+                              <option value="FL">Florida (FL)</option>
+                              <option value="GA">Georgia (GA)</option>
+                              <option value="HI">Hawaii (HI)</option>
+                              <option value="ID">Idaho (ID)</option>
+                              <option value="IL">Illinois (IL)</option>
+                              <option value="IN">Indiana (IN)</option>
+                              <option value="IA">Iowa (IA)</option>
+                              <option value="KS">Kansas (KS)</option>
+                              <option value="KY">Kentucky (KY)</option>
+                              <option value="LA">Louisiana (LA)</option>
+                              <option value="ME">Maine (ME)</option>
+                              <option value="MD">Maryland (MD)</option>
+                              <option value="MA">Massachusetts (MA)</option>
+                              <option value="MI">Michigan (MI)</option>
+                              <option value="MN">Minnesota (MN)</option>
+                              <option value="MS">Mississippi (MS)</option>
+                              <option value="MO">Missouri (MO)</option>
+                              <option value="MT">Montana (MT)</option>
+                              <option value="NE">Nebraska (NE)</option>
+                              <option value="NV">Nevada (NV)</option>
+                              <option value="NH">New Hampshire (NH)</option>
+                              <option value="NJ">New Jersey (NJ)</option>
+                              <option value="NM">New Mexico (NM)</option>
+                              <option value="NY">New York (NY)</option>
+                              <option value="NC">North Carolina (NC)</option>
+                              <option value="ND">North Dakota (ND)</option>
+                              <option value="OH">Ohio (OH)</option>
+                              <option value="OK">Oklahoma (OK)</option>
+                              <option value="OR">Oregon (OR)</option>
+                              <option value="PA">Pennsylvania (PA)</option>
+                              <option value="RI">Rhode Island (RI)</option>
+                              <option value="SC">South Carolina (SC)</option>
+                              <option value="SD">South Dakota (SD)</option>
+                              <option value="TN">Tennessee (TN)</option>
+                              <option selected="selected" value="TX" >Texas (TX)</option>
+                              <option value="UT">Utah (UT)</option>
+                              <option value="VT">Vermont</option>
+                              <option value="VA">Virginia</option>
+                              <option value="WA">Washington</option>
+                              <option value="WV">West Virginia</option>
+                              <option value="WI">Wisconsin</option>
+                              <option value="WY">Wyoming</option>
+                            </select>
+                          </div>
+                          </div>
+                        <div class="small-2 medium-2 large-2 margin-right-25">
+                          <label class="txmMol-inputbox">
+                                  <input type="text" id="newZip" placeholder="Zip" value="{{newZip}}" required />
+                                  <span>Zip</span>
+                                  <span class="form-error">Required</span>
+                                </label>
+                          </div>
+                     </div>
+                     <div class="grid-x">
+                       <div class="margin-top-50">
+                         <p> Does this address change affect covered locations?</p>
+                         <div class="grid-x">
+                           <div class="margin-right-25">
+                         <label class="txmMol-radioContainer txmMol-radio">
+                            <input  id="radioBtnYes" name="item" class="radiobut" type="radio"/> Yes
+                            <div class="txmMol-radioContainer-back"> </div>
+                          </label>
+                        </div><div>
+                          <label class="txmMol-radioContainer txmMol-radio">
+                            <input id="radioBtnNo" name="item" class="radiobut" type="radio" [checked]="true"/> No
+                            <div class="txmMol-radioContainer-back"> </div>
+                          </label>
+                        </div>
+                        </div>
+                       </div>
+                     </div>
+                    </div>
+                    <div class="grid-x" style="position: relative;">
+                      <div class="saveButton grid-x padding-right-25 padding-bottom-20">
+                        <button id="btnSaveMailingAddress" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(mailingAddressTextMessage)" (click)="save(mailingAddressTextMessage);"> Save</button>
+                     </div>
+                    </div>
+              </div>
+              </collapsible-body>
+            </collapsible-list-item> -->
+            <!--Mailing Address Change Ends-->
+            <!--Others Begin-->
+            <collapsible-list-item class="margin-bottom-50">
+              <collapsible-header class="collapsibleHeader margin-left-50" style="border-bottom:none;">
+                <label (click)="showOther()" class="txmMol-radioContainer txmMol-radio">
+                  <input id="radioBtnOther" class="radiobut" type="radio" name="changeType" [checked]="isOther" value="other" /> Other
+                  <div class="txmMol-radioContainer-back"> </div><br /><br />
+                </label>
+              </collapsible-header>
+              <collapsible-body [expanded]="isOther" class="collapsibleBody border-none">
+                <div class="collapsible-body-innerdiv">
+                  <div class="margin-bottom-25"> Use this space to include any notes or questions you might have.</div>
+                  <label class="txmMol-inputbox">
+                    <textarea type="text" id="otherTextMessage" name="otherTextMessage" required [(ngModel)]="otherTextMessage" placeholder="Text"> </textarea>
+                    <span>Text</span>
+                    <div *ngIf="!otherTextMessage" class="error-message">*Message is a required field</div>
+                  </label>
+                  <div class="grid-x" style="position: relative;">
+                    <div class="saveButton grid-x">
+                        <button id="btnSaveOthers" class="txmButton-small txmBtnColor-PriAlt" [disabled]="enableDisable(othersTextMessage)" (click)="save(othersTextMessage);"> Save</button>
+                   </div>
+                  </div>
+              </div>
+              </collapsible-body>
+            </collapsible-list-item>
+            <!--Others Ends-->
+          </collapsible-list>
+        </div>
+      </div>
+      <!-- <div>
+        <input type="file" name="upload" (change)="onFileChange($event)" />
+        <button type="submit">Upload</button>
+      </div> -->
+      <!-- <div class="grid-x">
+      <h3 class="margin-bottom-25"> Attach Files</h3>
+      <div>
+        <input type="file" name="upload" id="uploadedFiles" (change)="onFileChange($event,$event.target.files)"/>
+<<<<<<< HEAD
+         <button type="submit">Upload</button> -->
+<!-- =======
+      
+>>>>>>> 82e90c4b0b2bc6fd3a91560c9f660c214aef4cea
+      </div> 
+      <div class="grid-x">
+        <div class="cell">
+          <div class="small-12 columns text-center">
+            <button class="txmButton txmBtnColor-Sec">Cancel</button>
+            <span style="padding-right:2em;"></span>
+            <button class="txmButton txmBtnColor-Pri"  [disabled]="!myForm.valid">Submit</button>
+          </div>
+        </div>
+      </div> 
+   -->
+
+   <!-- <h4>Attach Files</h4>
+<p>Use this space to provide supporting files, if needed.</p>
+
+<input type="file" #fileInput ng2FileSelect [uploader]="uploader" multiple />
+<div class="base-drop-zone" [ngClass]="{'file-over': hasBaseDropZoneOver}" ng2FileDrop [uploader]="uploader"
+  (click)="fileInput.click()"></div>
+<label for="file-upload" class="custom-file-upload">
+  <div class="centered-content">
+    <i class="fas fa-upload fa-2x"></i>
+    <span>
+      <span class="blue-text">
+        Upload a Document</span>
+      <br>or drag and drop one here</span>
+  </div>
+</label>
+
+
+{{uploader.queue}}
+
+  <table class="upload-queue-table">
+    <thead>
+      <tr>
+        <th *ngIf=" uploader.queue !=0">Uploading:</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor="let item of uploader.queue">
+        <td>
+          {{ item?.file?.name }}
+        </td>
+        <td>
+          {{ item?.file?.size/1024/1024 | number:'.2' }} MB
+        </td>
+        <td id="right-align">
+          <i class="fas fa-spinner fa-spin"></i>
+          <i class="fa fa-check-circle"></i>
+          <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+            <span class="glyphicon glyphicon-trash"></span>
+            <i class="far fa-trash-alt"></i> </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<div id="change-request-italic-note">
+  This Change Request is not evidence of an endorsement to the policy. Do not use or release it outside of your
+  agency.</div>
+<div class="grid-x">
+  <div class="cell" style="margin-bottom: 50px;">
+    <div class="small-12 columns text-center">
+      <button class="txmButton txmBtnColor-Sec">Cancel</button>
+      <span style="margin-right: 80%;"></span>
+      <button class="txmButton txmBtnColor-Pri" [disabled]=false>Submit</button>
+    </div>
+  </div>
+</div> -->
+   </div>
+  </div> 
+</form>
+
+<script>
+  $(function () {
+    $(".txmDatepicker").datepicker({
+      duration: "slow"
+    }).datepicker('widget').wrap('<div class="ll-skin-nigran" style="display:none;"/>');
+  });
+</script>

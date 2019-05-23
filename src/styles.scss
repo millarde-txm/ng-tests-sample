@@ -1,0 +1,325 @@
+@import "~foundation-sites/scss/foundation";
+@include foundation-everything;
+@import "~ngx-foundation/assets/scss/main";
+// // @import '~materialize-css/dist/css/materialize.min.css';
+
+.main {
+  margin: 0 auto;
+  height: 100vh;
+  max-width: 1280px;
+}
+
+body {
+  font-family: "Open Sans";
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+collapsible-body.collapsibleBody {
+  -webkit-box-shadow: none !important;
+  -webkit-padding: none !important;
+  border: 1px solid;
+  padding: 0;
+  margin-left: 75px;
+  margin-right: 75px;
+  background-color: #f7f7f7;
+}
+
+::after collapsible-body.collapsibleBody {
+  margin-bottom: 25px !important;
+}
+
+.collapsible-body-innerdiv {
+  border: 1px solid;
+  border-color: #cccccc !important;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+
+.saveButton {
+  float: right !important;
+  // position: absolute;
+  // top: -20;
+  // right: 0;
+  margin-left: auto;
+  margin-top: auto;
+  // margin-left: 103px;
+  // margin-top: 35px;
+}
+
+collapsible-header.collapsibleHeader {
+  padding: 0 !important;
+}
+
+:host /deep/._nghost-c4 {
+    display: block;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding-left: 3em;
+    padding-bottom: 3em;
+    padding-right: 3em;
+    background-color: aliceblue;
+}
+
+.txmBtnColor-PriAlt:disabled {
+  background-color: #DCDEE0;
+  color: #ccc;
+}
+
+.txmBtnColor-PriAlt:hover:disabled{
+  background-color: #DCDEE0;
+}
+
+.error-message{
+  color:red;
+}
+/* Daniela's CSS additions start here */
+
+input[type="file"] {
+  display: none;
+}
+
+.file-upload {
+  margin: 0 50px;
+}
+
+.file-upload p {
+  padding: 0;
+  margin-bottom: 25px;
+}
+
+p,
+label.custom-file-upload,
+div.base-drop-zone {
+  margin-left: 50px;
+}
+
+label.custom-file-upload {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 69.115px;
+  padding-bottom: 69.115px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  width: 1163px;
+  height: 190px;
+}
+
+div.base-drop-zone {
+  position: absolute;
+  z-index: 1;
+  width: 1163px;
+  height: 190px;
+}
+
+.centered-content {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+label.custom-file-upload .svg-inline--fa.fa-w-16,
+span {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.centered-content span {
+  text-align: justify;
+}
+
+.centered-content span.blue-text {
+  font-weight: bold;
+  color: #0063b8;
+}
+
+.svg-inline--fa.fa-w-16 {
+  color: #0063b8;
+  margin-right: 20px;
+}
+
+#change-request-italic-note {
+  margin-bottom: 50px;
+  font-style: italic;
+  text-align: center;
+}
+
+.upload-queue-table {
+  border-collapse: collapse;
+  width: 1163px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+.icons-float-right {
+  float: right;
+}
+
+.file-size-centered {
+  text-align: center;
+}
+
+/* end of Daniela's styling */
+
+/* accordion styling */
+.a:hover,
+a:focus {
+  color: black;
+}
+
+.accordion-title:hover,
+.accordion-title:focus {
+  background-color: white;
+}
+
+:last-child:not(.is-active) > .accordion-title {
+  border-bottom: none;
+  border-radius: none;
+  margin-bottom: 25px;
+}
+
+.accordion-title {
+  border: none !important;
+  color: black !important;
+  font-family: "Open Sans", Calibri !important;
+  font-size: 14px !important;
+  background-color: #f7f7f7 !important;
+  padding: 15px 25px 15px 25px !important;
+}
+
+.accordion-title ng-star-inserted {
+  margin-left: 25px !important;
+}
+
+.accordion-title::before {
+  content: "\f007";
+}
+
+.is-active > .accordion-title::before {
+  content: "\f007";
+}
+
+:last-child > .accordion-title {
+  margin-top: 10px !important;
+}
+
+a:hover,
+a:focus {
+  color: none;
+}
+
+/deep/.is-active > .accordion-title::before {
+  content: none;
+}
+
+.accordion-content {
+  border: none !important;
+  background-color: #f7f7f7 !important;
+  padding: 20px 50px 15px 25px !important;
+}
+
+:last-child > .accordion-content:last-child {
+  border-bottom: none !important;
+}
+
+// /deep/.accordion-content {
+//   background-color:#f0ead6 !important;
+//   border-radius: 6px !important;
+//   opacity: 100% !important;
+//   width: 770px !important;
+//   height: 190px !important;
+//   padding-left: 50px !important; }
+
+._nghost-c4 {
+  display: block !important;
+  border-bottom: none !important;
+  box-sizing: none !important;
+  padding: none !important;
+}
+
+.side-nav [_nghost-c4] {
+  padding: 0;
+}
+
+.side-nav [_nghost-c4],
+.side-nav.fixed [_nghost-c4] {
+  border: 0;
+  background-color: #fff;
+}
+
+/* */
+.button-class {
+  text-align: center;
+  margin: 0 auto;
+  padding-right: 5em;
+}
+
+/* Foundation-ngx Datepicker styles to match style guide */
+
+.bs-datepicker-container {
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid #aed0ea;
+}
+
+input txmDatepicker .bs-datepicker-head button:hover {
+  background-color: #e36f1e !important;
+}
+
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+
+svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+
+.bs-datepicker-body table td {
+  color: black;
+}
+
+.theme-primary .bs-datepicker-body table td span.selected {
+background-color: #e36f1e; }
+
+.bs-datepicker-head button {
+  color: black;
+}
+
+thead {
+  background: white;
+}
+
+thead {
+  background: white;
+}
+
+theme-primary .bs-datepicker-head {
+  background-color: white;
+}
+
+.bs-datepicker-body {
+  border: none;
+}
+
+.bs-datepicker-body table th {
+  color: black;
+}
+
+.theme-primary .bs-datepicker-head {
+  background-color: white;
+}
+
+.bs-datepicker-head button.current {
+  padding: 0 2px;
+  font-weight: bold;
+}
